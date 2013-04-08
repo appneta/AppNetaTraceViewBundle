@@ -155,8 +155,8 @@ class KernelEventSubscriber implements EventSubscriberInterface {
     // Register before and after listeners for the primary kernel events.
     $events[KernelEvents::REQUEST][] = array('beforeRequest', 255);
     $events[KernelEvents::REQUEST][] = array('afterRequest', -255);
-    $events[KernelEvents::VIEW][] = array('beforeView', 255);
-    $events[KernelEvents::VIEW][] = array('afterView', -255);
+//    $events[KernelEvents::VIEW][] = array('beforeView', 255);
+//    $events[KernelEvents::VIEW][] = array('afterView', -255);
     $events[KernelEvents::CONTROLLER][] = array('beforeController', 255);
     $events[KernelEvents::CONTROLLER][] = array('afterController', -255);
     $events[KernelEvents::RESPONSE][] = array('beforeResponse', 255);
