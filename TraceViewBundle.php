@@ -21,7 +21,7 @@ class TracelyticsBundle extends Bundle {
    */
   public function build(ContainerBuilder $container) {
     // Event subscriber.
-    $container->register('kernel.response', 'Drupal\tracelytics\EventSubscriber\EventSubscriber')
+    $container->register('kernel.response', 'Drupal\tracelytics\KernelEventSubscriber\KernelEventSubscriber')
       ->addTag('event_subscriber');
   }
 }
