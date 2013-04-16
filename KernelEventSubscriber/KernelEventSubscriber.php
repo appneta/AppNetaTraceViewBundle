@@ -22,6 +22,12 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 class KernelEventSubscriber implements EventSubscriberInterface {
 
   /**
+   * The stack of layers visited so far.
+   * @var array
+   */
+  private $stack;
+
+  /**
    * Enter the KernelEvents::REQUEST profile.
    *
    * @param \Symfony\Component\HttpKernel\Event\GetResponseEvent $event
@@ -54,6 +60,7 @@ class KernelEventSubscriber implements EventSubscriberInterface {
    */
 
   public function beforeView(GetResponseForControllerResultEvent $event) {
+    $this->stack[] = 'view';
     oboe_log('profile_entry', array('ProfileName' => 'view'));
   }
 
@@ -65,7 +72,6 @@ class KernelEventSubscriber implements EventSubscriberInterface {
    */
 
   public function afterView(GetResponseForControllerResultEvent $event) {
-    oboe_log('profile_exit', array('ProfileName' => 'view'));
   }
 
   /**
@@ -100,6 +106,9 @@ class KernelEventSubscriber implements EventSubscriberInterface {
    */
 
   public function beforeResponse(FilterResponseEvent $event) {
+    if (array_pop($this->stack) == 'view') {
+      oboe_log('profile_exit', array('ProfileName' => 'view'));      
+    }
     oboe_log('profile_entry', array('ProfileName' => 'response'));
   }
 
@@ -157,10 +166,11 @@ class KernelEventSubscriber implements EventSubscriberInterface {
     // Register before and after listeners for the primary kernel events.
     $events[KernelEvents::REQUEST][] = array('beforeRequest', 255);
     $events[KernelEvents::REQUEST][] = array('afterRequest', -255);
-//    $events[KernelEvents::VIEW][] = array('beforeView', 255);
-//    $events[KernelEvents::VIEW][] = array('afterView', -255);
+    $events[KernelEvents::VIEW][] = array('beforeView', 255);
     $events[KernelEvents::CONTROLLER][] = array('beforeController', 255);
     $events[KernelEvents::CONTROLLER][] = array('afterController', -255);
+    // KernelEvents::VIEW ends when KernelEvents::RESPONSE begins.
+//    $events[KernelEvents::RESPONSE][] = array('afterView', 255);
     $events[KernelEvents::RESPONSE][] = array('beforeResponse', 255);
     $events[KernelEvents::RESPONSE][] = array('afterResponse', -255);
     $events[KernelEvents::TERMINATE][] = array('beforeTerminate', 255);
