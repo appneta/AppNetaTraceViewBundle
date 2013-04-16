@@ -87,6 +87,8 @@ class KernelEventSubscriber implements EventSubscriberInterface {
    */
 
   public function afterController(FilterControllerEvent $event) {
+    $controller = $event->getController();
+    oboe_log('info', array('Controller' => $controller, 'Action' => NULL));
     oboe_log('profile_exit', array('ProfileName' => 'controller'));
   }
 
