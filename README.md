@@ -1,4 +1,4 @@
-symfony
+TraceViewBundle
 =======
 
-TraceView bundle for Symfony2
+Additional integration with AppNeta TraceView for Symfony2.
