@@ -4,7 +4,7 @@
  * Subscribe to HTTPKernel events in order to trace them.
  */
 
-namespace Drupal\tracelytics\KernelEventSubscriber;
+namespace AppNeta\TraceView\KernelEventSubscriber;
 
 use Symfony\Component\HttpKernel\Event\GetResponseEvent;
 use Symfony\Component\HttpKernel\Event\GetResponseForControllerResultEvent;

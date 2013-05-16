@@ -2,10 +2,10 @@
 
 /**
  * @file
- * Contains TracelyticsBundle.
+ * Contains TraceViewBundle.
  */
 
-namespace Drupal\tracelytics;
+namespace AppNeta\TraceView;
 
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Reference;
@@ -14,14 +14,14 @@ use Symfony\Component\HttpKernel\Bundle\Bundle;
 /**
  * TraceView dependency injection container.
  */
-class TracelyticsBundle extends Bundle {
+class TraceViewBundle extends Bundle {
 
   /**
    * Overrides Symfony\Component\HttpKernel\Bundle\Bundle::build().
    */
   public function build(ContainerBuilder $container) {
     // Event subscriber.
-    $container->register('kernel.response', 'Drupal\tracelytics\KernelEventSubscriber\KernelEventSubscriber')
+    $container->register('kernel.response', 'AppNeta\TraceView\KernelEventSubscriber\KernelEventSubscriber')
       ->addTag('event_subscriber');
   }
 }
