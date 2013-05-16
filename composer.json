@@ -1,0 +1,29 @@
+{
+    "name": "appneta/traceview-bundle",
+    "type": "symfony-bundle",
+    "description": "Additional integration with AppNeta TraceView for Symfony2.",
+    "keywords": ["symfony", "traceview", "appneta", "performance", "monitoring", "apm"],
+    "homepage": "https://github.com/appneta/TraceViewBundle",
+    "license": "AppNeta",
+    "authors": [
+        {
+            "name":     "James Meickle",
+            "email":    "jmeickle@appneta.com",
+            "homepage": "https://github.com/Eronarn",
+            "role":     "Maintainer"
+        },
+        {
+            "name":     "AppNeta",
+            "email":    "traceviewsupport@appneta.com",
+            "homepage": "https://github.com/appneta"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.2",
+        "symfony/framework-bundle": ">2.0"
+    },
+    "autoload": {
+        "psr-0": { "AppNeta\\TraceView\\TraceViewBundle": "" }
+    },
+    "target-dir": "AppNeta/TraceView/TraceViewBundle"
+}
