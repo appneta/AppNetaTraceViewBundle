@@ -4,7 +4,7 @@
  * Subscribe to HTTPKernel events in order to trace them.
  */
 
-namespace AppNeta\TraceView\KernelEventSubscriber;
+namespace AppNeta\TraceView\TraceViewBundle\EventListener;
 
 use Symfony\Component\HttpKernel\Event\GetResponseEvent;
 use Symfony\Component\HttpKernel\Event\GetResponseForControllerResultEvent;
@@ -17,9 +17,9 @@ use Symfony\Component\HttpKernel\HttpKernelInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 /**
- * TraceView HTTPKernel event subscriber.
+ * TraceView HTTPKernel event listener.
  */
-class KernelEventSubscriber implements EventSubscriberInterface {
+class KernelEventListener implements EventSubscriberInterface {
 
   /**
    * The stack of layers visited so far.

@@ -5,7 +5,7 @@
  * Contains TraceViewBundle.
  */
 
-namespace AppNeta\TraceView;
+namespace AppNeta\TraceView\TraceViewBundle;
 
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Reference;
@@ -20,9 +20,9 @@ class TraceViewBundle extends Bundle {
    * Overrides Symfony\Component\HttpKernel\Bundle\Bundle::build().
    */
   public function build(ContainerBuilder $container) {
-    // Event subscriber.
-    $container->register('kernel.response', 'AppNeta\TraceView\KernelEventSubscriber\KernelEventSubscriber')
-      ->addTag('event_subscriber');
+    // Event listener.
+    $container->register('kernel.response', 'AppNeta\TraceView\TraceViewBundle\EventListener\KernelEventListener')
+      ->addTag('event_listener');
   }
 }
 
