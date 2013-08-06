@@ -20,9 +20,15 @@ class TracelyticsBundle extends Bundle {
    * Overrides Symfony\Component\HttpKernel\Bundle\Bundle::build().
    */
   public function build(ContainerBuilder $container) {
-    // Event subscriber.
-    $container->register('kernel.response', 'Drupal\tracelytics\KernelEventSubscriber\KernelEventSubscriber')
-      ->addTag('event_subscriber');
+    if (!$container->hasDefinition('twig')) {
+      return;
+    }
+    $twig = $container->getDefinition('twig');
+    // Retrives the second argument, which is an array containing configuration.
+    $twig_config = $twig->getArgument(1);
+    $twig_config['base_template_class'] = 'Drupal\tracelytics\Template\TraceviewTwigTemplate';
+    $twig->replaceArgument(1, $twig_config);
+    return;
   }
 }
 
