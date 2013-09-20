@@ -36,17 +36,21 @@ class TraceViewContainerAwareEventDispatcher extends ContainerAwareEventDispatch
     public function dispatch($eventName, Event $event = null)
     {
 
-        // Check whether this is a kernel request or response.
+        // Check whether this is a kernel request, response, or terminate.
         $is_request = ($eventName === "kernel.request");
         $is_response = ($eventName === "kernel.response");
+        $is_terminate = ($eventName === "kernel.terminate");
 
-        // On the start of a request, start a request layer.
+        // On the start of a kernel request or terminate, enter a layer.
         if ($is_request) {
             oboe_log(($event->getRequestType() === HttpKernelInterface::MASTER_REQUEST) ? 'HttpKernel.master_request' : 'HttpKernel.sub_request', "entry", array(), TRUE);
+            return;
+        } elseif ($is_terminate) {
+            oboe_log("HttpKernel.terminate", "entry", array(), TRUE);
+            return;
         }
-
-        // Create a profile if the event has any listeners.
-        if ($this->hasListeners($eventName)) {
+        // Enter a profile if the event has any listeners.
+        elseif ($this->hasListeners($eventName)) {
             oboe_log("profile_entry", array('ProfileName' => $eventName), TRUE);
         }
 
@@ -71,14 +75,16 @@ class TraceViewContainerAwareEventDispatcher extends ContainerAwareEventDispatch
             oboe_log('info', array("Controller" => (is_object($controller)) ? get_class($controller) : $controller, "Action" => (is_object($action)) ? get_class($action) : $action));
         }
 
-        // End the profile if the event has any listeners.
+        // Exit the profile if the event has any listeners.
         if ($this->hasListeners($eventName)) {
             oboe_log("profile_exit", array('ProfileName' => $eventName));
         }
 
-        // On the end of a response, stop the request layer.
+        // On the end of a kernel response or terminate, exit the layer.
         if ($is_response) {
             oboe_log(($event->getRequestType() === HttpKernelInterface::MASTER_REQUEST) ? 'HttpKernel.master_request' : 'HttpKernel.sub_request', "exit", array());
+        } elseif ($is_terminate) {
+            oboe_log('HttpKernel.terminate', "exit", array());
         }
 
         return $ret;
