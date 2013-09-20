@@ -22,7 +22,7 @@ use Symfony\Component\HttpKernel\HttpKernelInterface;
  * @author Bernhard Schussek <bschussek@gmail.com>
  * @author Jordan Alliot <jordan.alliot@gmail.com>
  */
-class TraceviewContainerAwareEventDispatcher extends ContainerAwareEventDispatcher
+class TraceViewContainerAwareEventDispatcher extends ContainerAwareEventDispatcher
 {
 
     /**

@@ -2,7 +2,7 @@
 
 /**
  * @file
- * Definition of Drupal\traceview\Template\TraceviewTwigTemplate.
+ * Definition of Drupal\traceview\Template\TraceViewTwigTemplate.
  */
 
 namespace Drupal\traceview\Template;
@@ -12,7 +12,7 @@ use Drupal\Core\Template\TwigTemplate;
 /**
  * This is the base class for compiled Twig templates.
  */
-abstract class TraceviewTwigTemplate extends TwigTemplate {
+abstract class TraceViewTwigTemplate extends TwigTemplate {
     /**
      * {@inheritdoc}
      */

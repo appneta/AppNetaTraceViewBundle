@@ -2,7 +2,7 @@
 
 /**
  * @file
- * Contains TracelyticsBundle.
+ * Contains TraceViewBundle.
  */
 
 namespace Drupal\traceview;
@@ -14,7 +14,7 @@ use Symfony\Component\HttpKernel\Bundle\Bundle;
 /**
  * TraceView dependency injection container.
  */
-class TracelyticsBundle extends Bundle {
+class TraceViewBundle extends Bundle {
 
   /**
    * Overrides Symfony\Component\HttpKernel\Bundle\Bundle::build().
@@ -26,7 +26,7 @@ class TracelyticsBundle extends Bundle {
     $twig = $container->getDefinition('twig');
     // Retrives the second argument, which is an array containing configuration.
     $twig_config = $twig->getArgument(1);
-    $twig_config['base_template_class'] = 'Drupal\traceview\Template\TraceviewTwigTemplate';
+    $twig_config['base_template_class'] = 'Drupal\traceview\Template\TraceViewTwigTemplate';
     $twig->replaceArgument(1, $twig_config);
     return;
   }
