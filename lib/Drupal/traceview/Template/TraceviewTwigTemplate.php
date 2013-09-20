@@ -2,10 +2,10 @@
 
 /**
  * @file
- * Definition of Drupal\tracelytics\Template\TraceviewTwigTemplate.
+ * Definition of Drupal\traceview\Template\TraceviewTwigTemplate.
  */
 
-namespace Drupal\tracelytics\Template;
+namespace Drupal\traceview\Template;
 
 use Drupal\Core\Template\TwigTemplate;
 

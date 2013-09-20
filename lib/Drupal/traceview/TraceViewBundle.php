@@ -5,7 +5,7 @@
  * Contains TracelyticsBundle.
  */
 
-namespace Drupal\tracelytics;
+namespace Drupal\traceview;
 
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Reference;
@@ -26,7 +26,7 @@ class TracelyticsBundle extends Bundle {
     $twig = $container->getDefinition('twig');
     // Retrives the second argument, which is an array containing configuration.
     $twig_config = $twig->getArgument(1);
-    $twig_config['base_template_class'] = 'Drupal\tracelytics\Template\TraceviewTwigTemplate';
+    $twig_config['base_template_class'] = 'Drupal\traceview\Template\TraceviewTwigTemplate';
     $twig->replaceArgument(1, $twig_config);
     return;
   }

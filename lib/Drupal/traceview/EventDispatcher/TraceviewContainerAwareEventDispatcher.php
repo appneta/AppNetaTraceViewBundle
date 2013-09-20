@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Drupal\tracelytics\EventDispatcher;
+namespace Drupal\traceview\EventDispatcher;
 
 use Symfony\Component\EventDispatcher\ContainerAwareEventDispatcher;
 use Symfony\Component\EventDispatcher\Event;
