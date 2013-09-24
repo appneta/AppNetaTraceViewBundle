@@ -44,10 +44,8 @@ class TraceViewContainerAwareEventDispatcher extends ContainerAwareEventDispatch
         // On the start of a kernel request or terminate, enter a layer.
         if ($is_request) {
             oboe_log(($event->getRequestType() === HttpKernelInterface::MASTER_REQUEST) ? 'HttpKernel.master_request' : 'HttpKernel.sub_request', "entry", array(), TRUE);
-            return;
         } elseif ($is_terminate) {
             oboe_log("HttpKernel.terminate", "entry", array(), TRUE);
-            return;
         }
         // Enter a profile if the event has any listeners.
         elseif ($this->hasListeners($eventName)) {
