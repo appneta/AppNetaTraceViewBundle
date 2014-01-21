@@ -2,24 +2,24 @@
 
 /**
  * @file
- * Definition of Drupal\traceview\Template\TraceViewTwigTemplate.
+ * Definition of AppNeta\TraceViewBundle\Template\TraceViewTwigTemplate.
  */
 
-namespace Drupal\traceview\Template;
+namespace AppNeta\TraceViewBundle\Template;
 
-use Drupal\Core\Template\TwigTemplate;
+use Twig\Template;
 
 /**
  * This is the base class for compiled Twig templates.
  */
-abstract class TraceViewTwigTemplate extends TwigTemplate {
+abstract class TraceViewTwigTemplate extends Twig_Template {
     /**
      * {@inheritdoc}
      */
     public function display(array $context, array $blocks = array())
     {
         oboe_log("profile_entry", array('ProfileName' => $this->getTemplateName()), TRUE);
-        $this->displayWithErrorHandling($this->env->mergeGlobals($context), $blocks);
+        parent::display($context, $blocks);
         oboe_log("profile_exit", array('ProfileName' => $this->getTemplateName()));
     }
 }
