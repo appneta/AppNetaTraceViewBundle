@@ -23,7 +23,7 @@
         "ext-oboe": "*"
     },
     "autoload": {
-        "psr-0": { "AppNeta\\TraceView\\TraceViewBundle": "" }
+        "psr-0": { "AppNeta\\TraceViewBundle": "" }
     },
-    "target-dir": "AppNeta/TraceView/TraceViewBundle"
+    "target-dir": "AppNeta/TraceViewBundle"
 }
