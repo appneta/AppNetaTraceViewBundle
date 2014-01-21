@@ -1,38 +1,20 @@
 <?php
 
 /*
- * This file is part of the Symfony package.
- *
- * (c) Fabien Potencier <fabien@symfony.com>
- *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
+ * Replace the standard Symfony EventDispatcher with one that reports data to TraceView.
  */
 
-namespace Drupal\traceview\EventDispatcher;
+namespace AppNeta\TraceViewBundle\EventDispatcher;
 
 use Symfony\Component\EventDispatcher\ContainerAwareEventDispatcher;
 use Symfony\Component\EventDispatcher\Event;
 use Symfony\Component\HttpKernel\HttpKernelInterface;
+
 /**
- * Lazily loads listeners and subscribers from the dependency injection
- * container
- *
- * @author Fabien Potencier <fabien@symfony.com>
- * @author Bernhard Schussek <bschussek@gmail.com>
- * @author Jordan Alliot <jordan.alliot@gmail.com>
+ * Evaluate dependency injection container events, wrapped in TraceView events.
  */
 class TraceViewContainerAwareEventDispatcher extends ContainerAwareEventDispatcher
 {
-
-    /**
-     * {@inheritDoc}
-     *
-     * Lazily loads listeners for this event from the dependency injection
-     * container.
-     *
-     * @throws \InvalidArgumentException if the service is not defined
-     */
     public function dispatch($eventName, Event $event = null)
     {
 
