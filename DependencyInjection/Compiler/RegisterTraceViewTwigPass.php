@@ -2,10 +2,10 @@
 
 /**
  * @file
- * Contains \Drupal\traceview\DependencyInjection\Compiler\RegisterTraceViewTwigPass.
+ * Contains \AppNeta\TraceViewBundle\DependencyInjection\Compiler\RegisterTraceViewTwigPass.
  */
 
-namespace Drupal\traceview\DependencyInjection\Compiler;
+namespace AppNeta\TraceViewBundle\DependencyInjection\Compiler;
 
 use Symfony\Component\DependencyInjection\Reference;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -31,7 +31,7 @@ class RegisterTraceViewTwigPass implements CompilerPassInterface {
 
     // Modify the second argument, which is an array containing configuration.
     $twig_config = $twig->getArgument(1);
-    $twig_config['base_template_class'] = 'Drupal\traceview\Template\TraceViewTwigTemplate';
+    $twig_config['base_template_class'] = 'AppNeta\TraceViewBundle\Template\TraceViewTwigTemplate';
     $twig->replaceArgument(1, $twig_config);
     return;
   }
