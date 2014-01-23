@@ -7,12 +7,10 @@
 
 namespace AppNeta\TraceViewBundle\Template;
 
-use Twig\Template;
-
 /**
  * This is the base class for compiled Twig templates.
  */
-abstract class TraceViewTwigTemplate extends Twig_Template {
+abstract class TraceViewTwigTemplate extends \Twig_Template {
     /**
      * {@inheritdoc}
      */
