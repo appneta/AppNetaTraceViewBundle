@@ -24,13 +24,16 @@ class TraceViewContainerAwareEventDispatcher extends ContainerAwareEventDispatch
         // Check whether this is a kernel request, response, or terminate.
         $is_request = ($eventName === "kernel.request");
         $is_response = ($eventName === "kernel.response");
+        $is_finish_request = ($eventName === "kernel.finish_request");
         $is_terminate = ($eventName === "kernel.terminate");
 
         // If this event is being listened to, report a layer or profile entry.
         if ($had_listeners) {
-            // On the start of a kernel request or terminate, enter a layer.
+            // On the start of a kernel request, finish request, or terminate, enter a layer.
             if ($is_request) {
                 oboe_log(($event->getRequestType() === HttpKernelInterface::MASTER_REQUEST) ? 'HttpKernel.master_request' : 'HttpKernel.sub_request', "entry", array(), TRUE);
+            } elseif ($is_finish_response) {
+                oboe_log("HttpKernel.finish_request", "entry", array(), TRUE);
             } elseif ($is_terminate) {
                 oboe_log("HttpKernel.terminate", "entry", array(), TRUE);
             }
@@ -66,9 +69,11 @@ class TraceViewContainerAwareEventDispatcher extends ContainerAwareEventDispatch
 
         // If this event was being listened to, report a layer or profile exit.
         if ($had_listeners) {
-            // On the end of a kernel response or terminate, exit a layer.
+            // On the end of a kernel response, finish response, or terminate, exit a layer.
             if ($is_response) {
                 oboe_log(($event->getRequestType() === HttpKernelInterface::MASTER_REQUEST) ? 'HttpKernel.master_request' : 'HttpKernel.sub_request', "exit", array());
+            } elseif ($is_finish_response) {
+                oboe_log("HttpKernel.finish_request", "exit", array());
             } elseif ($is_terminate) {
                 oboe_log('HttpKernel.terminate', "exit", array());
             // Otherwise, exit a profile (unless this is a request).
