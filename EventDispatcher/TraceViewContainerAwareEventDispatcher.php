@@ -32,13 +32,14 @@ class TraceViewContainerAwareEventDispatcher extends ContainerAwareEventDispatch
             // On the start of a kernel request, finish request, or terminate, enter a layer.
             if ($is_request) {
                 oboe_log(($event->getRequestType() === HttpKernelInterface::MASTER_REQUEST) ? 'HttpKernel.master_request' : 'HttpKernel.sub_request', "entry", array(), TRUE);
-            } elseif ($is_finish_response) {
+                oboe_log("profile_entry", array('ProfileName' => $eventName), TRUE);
+            } elseif ($is_finish_request) {
                 oboe_log("HttpKernel.finish_request", "entry", array(), TRUE);
             } elseif ($is_terminate) {
                 oboe_log("HttpKernel.terminate", "entry", array(), TRUE);
             }
-            // Otherwise, enter a profile (unless this is a response).
-            elseif (!$is_response)  {
+            // Otherwise, enter a profile.
+            else {
                 oboe_log("profile_entry", array('ProfileName' => $eventName), TRUE);
             }
         }
@@ -71,13 +72,14 @@ class TraceViewContainerAwareEventDispatcher extends ContainerAwareEventDispatch
         if ($had_listeners) {
             // On the end of a kernel response, finish response, or terminate, exit a layer.
             if ($is_response) {
+                oboe_log("profile_exit", array('ProfileName' => $eventName));
                 oboe_log(($event->getRequestType() === HttpKernelInterface::MASTER_REQUEST) ? 'HttpKernel.master_request' : 'HttpKernel.sub_request', "exit", array());
-            } elseif ($is_finish_response) {
+            } elseif ($is_finish_request) {
                 oboe_log("HttpKernel.finish_request", "exit", array());
             } elseif ($is_terminate) {
                 oboe_log('HttpKernel.terminate', "exit", array());
-            // Otherwise, exit a profile (unless this is a request).
-            } elseif (!$is_request) {
+            // Otherwise, exit a profile.
+            } else {
                 oboe_log("profile_exit", array('ProfileName' => $eventName));
             }
         }
