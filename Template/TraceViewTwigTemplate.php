@@ -16,8 +16,8 @@ abstract class TraceViewTwigTemplate extends \Twig_Template {
      */
     public function display(array $context, array $blocks = array())
     {
-        oboe_log("profile_entry", array('ProfileName' => $this->getTemplateName()), TRUE);
+        oboe_log(NULL, "profile_entry", array('ProfileName' => $this->getTemplateName()), TRUE);
         parent::display($context, $blocks);
-        oboe_log("profile_exit", array('ProfileName' => $this->getTemplateName()));
+        oboe_log(NULL, "profile_exit", array('ProfileName' => $this->getTemplateName()));
     }
 }
