@@ -18,6 +18,6 @@ abstract class TraceViewTwigTemplate extends \Twig_Template {
     {
         oboe_log(NULL, "profile_entry", array('ProfileName' => $this->getTemplateName()), TRUE);
         parent::display($context, $blocks);
-        oboe_log(NULL, "profile_exit", array('ProfileName' => $this->getTemplateName()));
+        oboe_log(NULL, "profile_exit", array('ProfileName' => $this->getTemplateName()), FALSE);
     }
 }

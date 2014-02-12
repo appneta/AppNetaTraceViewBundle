@@ -65,22 +65,22 @@ class TraceViewContainerAwareEventDispatcher extends ContainerAwareEventDispatch
             }
 
             // Report the C/A pair.
-            oboe_log(NULL, 'info', array("Controller" => (is_object($controller)) ? get_class($controller) : $controller, "Action" => (is_object($action)) ? get_class($action) : $action));
+            oboe_log(NULL, 'info', array("Controller" => (is_object($controller)) ? get_class($controller) : $controller, "Action" => (is_object($action)) ? get_class($action) : $action), FALSE);
         }
 
         // If this event was being listened to, report a layer or profile exit.
         if ($had_listeners) {
             // On the end of a kernel response, finish response, or terminate, exit a layer.
             if ($is_response) {
-                oboe_log(NULL, "profile_exit", array('ProfileName' => $eventName));
-                oboe_log(($event->getRequestType() === HttpKernelInterface::MASTER_REQUEST) ? 'HttpKernel.master_request' : 'HttpKernel.sub_request', "exit", array());
+                oboe_log(NULL, "profile_exit", array('ProfileName' => $eventName), FALSE);
+                oboe_log(($event->getRequestType() === HttpKernelInterface::MASTER_REQUEST) ? 'HttpKernel.master_request' : 'HttpKernel.sub_request', "exit", array(), FALSE);
             } elseif ($is_finish_request) {
-                oboe_log("HttpKernel.finish_request", "exit", array());
+                oboe_log("HttpKernel.finish_request", "exit", array(), FALSE);
             } elseif ($is_terminate) {
-                oboe_log('HttpKernel.terminate', "exit", array());
+                oboe_log('HttpKernel.terminate', "exit", array(), FALSE);
             // Otherwise, exit a profile.
             } else {
-                oboe_log(NULL, "profile_exit", array('ProfileName' => $eventName));
+                oboe_log(NULL, "profile_exit", array('ProfileName' => $eventName), FALSE);
             }
         }
 
