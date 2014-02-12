@@ -1,5 +1,6 @@
 TraceViewBundle
 =======
+![A Symfony request profiled in TraceView.](http://appneta.github.io/AppNetaTraceViewBundle/images/AppNetaTraceViewBundle.png)
 
 The `AppNeta\TraceViewBundle` bundle provides additional information about Symfony2 components to AppNeta TraceView. It can currently support:
 
