@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset='utf-8' />
+    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
+    <meta name="description" content="TraceViewBundle : A Symfony2 bundle for enhanced TraceView integration" />
+
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+
+    <title>TraceViewBundle</title>
+  </head>
+
+  <body>
+
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/appneta/AppNetaTraceViewBundle">View on GitHub</a>
+
+          <h1 id="project_title">TraceViewBundle</h1>
+          <h2 id="project_tagline">A Symfony2 bundle for enhanced TraceView integration</h2>
+
+            <section id="downloads">
+              <a class="zip_download_link" href="https://github.com/appneta/AppNetaTraceViewBundle/zipball/master">Download this project as a .zip file</a>
+              <a class="tar_download_link" href="https://github.com/appneta/AppNetaTraceViewBundle/tarball/master">Download this project as a tar.gz file</a>
+            </section>
+        </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+        <h1>
+<a name="traceviewbundle" class="anchor" href="#traceviewbundle"><span class="octicon octicon-link"></span></a>TraceViewBundle</h1>
+
+<p>The <code>AppNeta\TraceViewBundle</code> bundle provides additional information about Symfony2 components to AppNeta TraceView. It can currently support:</p>
+
+<ul>
+<li>Reporting a controller and action</li>
+<li>Tracking kernel events as layers</li>
+<li>Tracking other event listeners as profiles</li>
+<li>Tracking Twig template rendering as profiles</li>
+</ul><h1>
+<a name="installing" class="anchor" href="#installing"><span class="octicon octicon-link"></span></a>Installing</h1>
+
+<p>First, you'll need to pull in the <code>TraceViewBundle</code> as one of your app's
+dependencies using <a href="https://getcomposer.org/">Composer</a>. Either use <code>composer require</code>,
+or in your <code>composer.json</code> file, modify the <code>"require"</code> section to include the bundle:</p>
+
+<pre><code>    "require": {
+        "php": "&gt;=5.3.3",
+        "symfony/symfony": "~2.4",
+        "doctrine/orm": "~2.2,&gt;=2.2.3",
+        "doctrine/doctrine-bundle": "~1.2",
+        "twig/extensions": "~1.0",
+        [...]
+        "appneta/traceview-bundle": "master@dev" # Or whatever version you prefer.
+        [...]
+    },
+</code></pre>
+
+<p>If installing directly from GitHub, rather than from Packagist, you can add the
+extra repository to your <code>composer.json</code> in a top-level key of <code>repositories</code>
+structured like so:</p>
+
+<pre><code>    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/appneta/AppNetaTraceViewBundle"
+        }
+    ]
+</code></pre>
+
+<p>After using Composer to pull in the bundle, you'll need to make it available to
+your app. Add it to <code>app/AppKernel.php</code>, looking something like this:</p>
+
+<pre><code>    public function registerBundles()
+    {
+        $bundles = array(
+            new Symfony\Bundle\FrameworkBundle\FrameworkBundle(),
+            new Symfony\Bundle\SecurityBundle\SecurityBundle(),
+            new Symfony\Bundle\TwigBundle\TwigBundle(),
+            [...]
+            new AppNeta\TraceViewBundle\TraceViewBundle(),
+            [...]
+        );
+
+        return $bundles;
+    }
+</code></pre>
+
+<p>To enable controller/action and event listener tracking, add this section to your <code>config.yml</code>:</p>
+
+<pre><code>services:
+  event_dispatcher:
+    class: AppNeta\TraceViewBundle\EventDispatcher\TraceViewContainerAwareEventDispatcher
+    arguments: ['@service_container']
+</code></pre>
+
+<p>To enable Twig template tracking, add this line to the <code>twig</code> section of your <code>config.yml</code>:</p>
+
+<pre><code>twig:
+    base_template_class: AppNeta\TraceViewBundle\Template\TraceViewTwigTemplate
+</code></pre>
+
+<h1>
+<a name="known-issues" class="anchor" href="#known-issues"><span class="octicon octicon-link"></span></a>Known issues</h1>
+
+<ul>
+<li>Friendlier controller/action name reporting for long or multiple controllers</li>
+<li>Event dispatcher replacement currently conflicts with the Symfony debug toolbar</li>
+<li>User-configurable settings for which dispatched events to whitelist/blacklist for tracking</li>
+</ul><h1>
+<a name="contributing" class="anchor" href="#contributing"><span class="octicon octicon-link"></span></a>Contributing</h1>
+
+<p>The best way to improve this bundle is to work with the people using it! We
+actively encourage patches, pull requests, feature requests, and bug reports.
+Current goals include Symfony developer toolbar integration and performance or
+architectural improvements where possible.</p>
+      </section>
+    </div>
+
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p class="copyright">TraceViewBundle maintained by <a href="https://github.com/appneta">appneta</a></p>
+        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
+      </footer>
+    </div>
+
+    
+
+  </body>
+</html>
