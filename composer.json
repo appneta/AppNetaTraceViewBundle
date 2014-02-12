@@ -4,7 +4,7 @@
     "description": "Additional integration with AppNeta TraceView for Symfony2.",
     "keywords": ["symfony", "twig", "traceview", "appneta", "performance", "monitoring", "apm"],
     "homepage": "https://github.com/appneta/AppNetaTraceViewBundle",
-    "license": "AppNeta",
+    "license": "MIT",
     "authors": [
         {
             "name":     "James Meickle",
