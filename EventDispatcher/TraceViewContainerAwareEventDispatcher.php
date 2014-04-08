@@ -72,23 +72,7 @@ class TraceViewContainerAwareEventDispatcher extends ContainerAwareEventDispatch
 
         // If the event is a kernel controller, report controller/action information.
         if ($eventName === "kernel.controller") {
-            $event_controller = $ret->getController();
-
-            // We use the same logic as the Symfony debug toolbar to parse out controller/action.
-            if (is_array($event_controller)) {
-                $controller = $event_controller[0];
-                $action = $event_controller[1];
-            } elseif ($controller instanceof \Closure) {
-                $r = new \ReflectionFunction($event_controller);
-                $controller = $r->getName();
-                $action = NULL;
-            } else {
-                $controller = (string) $event_controller ?: NULL;
-                $action = NULL;
-            }
-
-            // Report the C/A pair.
-            oboe_log(NULL, 'info', array("Controller" => (is_object($controller)) ? get_class($controller) : $controller, "Action" => (is_object($action)) ? get_class($action) : $action), FALSE);
+            oboe_log(NULL, 'info', $this->parseControllerAction($ret), FALSE);
         }
 
         // If this event was being listened to, report a layer or profile exit.
@@ -108,5 +92,24 @@ class TraceViewContainerAwareEventDispatcher extends ContainerAwareEventDispatch
         }
 
         return $ret;
+    }
+
+    public function parseControllerAction($ret) {
+        $event_controller = $ret->getController();
+
+        // We use the same logic as the Symfony debug toolbar to parse out controller/action.
+        if (is_array($event_controller)) {
+            $controller = $event_controller[0];
+            $action = $event_controller[1];
+        } elseif ($controller instanceof \Closure) {
+            $r = new \ReflectionFunction($event_controller);
+            $controller = $r->getName();
+            $action = NULL;
+        } else {
+            $controller = (string) $event_controller ?: NULL;
+            $action = NULL;
+        }
+
+        return array("Controller" => (is_object($controller)) ? get_class($controller) : $controller, "Action" => (is_object($action)) ? get_class($action) : $action);
     }
 }
