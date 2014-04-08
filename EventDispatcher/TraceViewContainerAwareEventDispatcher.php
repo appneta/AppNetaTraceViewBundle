@@ -36,16 +36,16 @@ class TraceViewContainerAwareEventDispatcher extends ContainerAwareEventDispatch
         if ($had_listeners) {
             // On the start of a kernel request, finish request, or terminate, enter a layer.
             if ($is_request) {
-                oboe_log(($event->getRequestType() === HttpKernelInterface::MASTER_REQUEST) ? 'HttpKernel.master_request' : 'HttpKernel.sub_request', "entry", array(), TRUE);
-                oboe_log(NULL,"profile_entry", array('ProfileName' => $eventName), TRUE);
+                oboe_log(($event->getRequestType() === HttpKernelInterface::MASTER_REQUEST) ? 'HttpKernel.master_request' : 'HttpKernel.sub_request', "entry", array('Event' => get_class($event)), TRUE);
+                oboe_log(NULL,"profile_entry", array('Event' => get_class($event), 'ProfileName' => $eventName), TRUE);
             } elseif ($is_finish_request) {
-                oboe_log("HttpKernel.finish_request", "entry", array(), TRUE);
+                oboe_log("HttpKernel.finish_request", "entry", array('Event' => get_class($event)), TRUE);
             } elseif ($is_terminate) {
-                oboe_log("HttpKernel.terminate", "entry", array(), TRUE);
+                oboe_log("HttpKernel.terminate", "entry", array('Event' => get_class($event)), TRUE);
             }
             // Otherwise, enter a profile.
             else {
-                oboe_log(NULL, "profile_entry", array('ProfileName' => $eventName), TRUE);
+                oboe_log(NULL, "profile_entry", array('Event' => get_class($event), 'ProfileName' => $eventName), TRUE);
             }
         }
 
