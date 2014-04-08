@@ -26,13 +26,13 @@ class TraceViewContainerAwareEventDispatcher extends ContainerAwareEventDispatch
         // prevents broken traces as a result of adding/removing listeners.
         $had_listeners = $this->hasListeners($eventName);
 
-        // Check whether this is a kernel request, response, or terminate.
+        // Check whether this is a kernel request, response, finish request, or terminate.
         $is_request = ($eventName === "kernel.request");
         $is_response = ($eventName === "kernel.response");
         $is_finish_request = ($eventName === "kernel.finish_request");
         $is_terminate = ($eventName === "kernel.terminate");
 
-        // If this event is being listened to, report a layer or profile entry.
+        // If this event was being listened to, report a layer or profile entry.
         if ($had_listeners) {
             // On the start of a kernel request, finish request, or terminate, enter a layer.
             if ($is_request) {
