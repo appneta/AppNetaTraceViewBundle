@@ -1,3 +1,8 @@
+# v0.1.3
+- Close out the current profile before raising unhandled exceptions.
+- Report unhandled exceptions as errors in TraceView.
+- Report the event class as well as event name.
+
 # v0.1.2
 - Add an API stub so the bundle won't crash when php-oboe isn't present.
 - Change the php-oboe requirement to a suggestion.
