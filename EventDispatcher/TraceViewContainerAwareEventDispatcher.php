@@ -49,8 +49,26 @@ class TraceViewContainerAwareEventDispatcher extends ContainerAwareEventDispatch
             }
         }
 
-        // Dispatch the event as normal.
-        $ret = parent::dispatch($eventName, $event);
+        // Try to dispatch the event as normal.
+        try {
+            $ret = parent::dispatch($eventName, $event);
+        // Catch any exceptions that occur during dispatch.
+        } catch (\Exception $e) {
+            // If this event had listeners that created a profile, exit it.
+            if ($had_listeners && !($is_finish_request) && !($is_terminate)) {
+                oboe_log(NULL, "profile_exit", array('ProfileName' => $eventName), FALSE);
+            }
+            // Report the exception via oboe.
+            $info = array(
+                "ErrorClass" => get_class($e),
+                "ErrorMsg" => $e->getMessage(),
+                "Backtrace" => $e->getTraceAsString(),
+            );
+            oboe_log(NULL, "info", $info, FALSE);
+
+            // Then re-raise the exception.
+            throw $e;
+        }
 
         // If the event is a kernel controller, report controller/action information.
         if ($eventName === "kernel.controller") {
