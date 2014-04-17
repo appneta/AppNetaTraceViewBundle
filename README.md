@@ -7,7 +7,6 @@ The `AppNeta\TraceViewBundle` bundle provides additional information about Symfo
 - Reporting a controller and action
 - Tracking kernel events as layers
 - Tracking other event listeners as profiles
-- Tracking Twig template rendering as profiles
 
 # Installing
 
@@ -63,12 +62,6 @@ services:
   event_dispatcher:
     class: AppNeta\TraceViewBundle\EventDispatcher\TraceViewContainerAwareEventDispatcher
     arguments: ['@service_container']
-```
-
-To enable Twig template tracking, add this line to the `twig` section of your `config.yml`:
-```
-twig:
-    base_template_class: AppNeta\TraceViewBundle\Template\TraceViewTwigTemplate
 ```
 
 # Known issues
