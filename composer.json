@@ -24,7 +24,8 @@
         "symfony/symfony": "~2.1"
     },
     "suggest": {
-        "ext-oboe": "`AppNeta/TraceViewBundle` will not report data unless the `php-oboe` extension is enabled at v1.4.4 or higher."
+        "ext-oboe": "`AppNeta/TraceViewBundle` will not report data unless the `php-oboe` extension is enabled at v1.4.4 or higher.",
+        "appneta/traceview-twig": "`AppNeta/TraceViewTwig` provides additional information about Twig template rendering time and helpers for adding real user monitoring JavaScript."
     },
     "autoload": {
         "psr-0": { "AppNeta\\TraceViewBundle": "" },
