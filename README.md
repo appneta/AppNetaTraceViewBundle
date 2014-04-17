@@ -2,7 +2,7 @@ TraceViewBundle
 =======
 ![A Symfony request profiled in TraceView.](http://appneta.github.io/AppNetaTraceViewBundle/images/AppNetaTraceViewBundle.png)
 
-The `AppNeta\TraceViewBundle` bundle provides additional information about Symfony2 components to AppNeta TraceView. It can currently support:
+The `AppNeta\TraceViewBundle` bundle provides additional information about Symfony2 components to [AppNeta TraceView](http://www.appneta.com/products/traceview/). It currently supports:
 
 - Reporting a controller and action
 - Tracking kernel events as layers
