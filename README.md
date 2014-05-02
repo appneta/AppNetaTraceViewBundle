@@ -58,10 +58,8 @@ your app. Add it to `app/AppKernel.php`, looking something like this:
 
 To enable controller/action and event listener tracking, add this section to your `config.yml`:
 ```
-services:
-  event_dispatcher:
-    class: AppNeta\TraceViewBundle\EventDispatcher\TraceViewContainerAwareEventDispatcher
-    arguments: ['@service_container']
+parameters:
+  event_dispatcher.class: AppNeta\TraceViewBundle\EventDispatcher\TraceViewContainerAwareEventDispatcher
 ```
 
 # Known issues
