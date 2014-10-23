@@ -1,8 +1,8 @@
 {
     "name": "appneta/traceview-bundle",
     "type": "symfony-bundle",
-    "description": "Additional integration with AppNeta TraceView for Symfony2, including Twig support.",
-    "keywords": ["symfony", "twig", "traceview", "appneta", "performance", "monitoring", "apm"],
+    "description": "Additional integration with AppNeta TraceView for Symfony2 (or anything else using EventDispatcher/HTTPKernel).",
+    "keywords": ["symfony", "traceview", "appneta", "performance", "monitoring", "apm"],
     "homepage": "https://github.com/appneta/AppNetaTraceViewBundle",
     "license": "MIT",
     "authors": [
