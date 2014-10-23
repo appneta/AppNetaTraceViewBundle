@@ -1,3 +1,8 @@
+# v1.0.0
+- Move all Twig support into AppNetaTraceViewTwig.
+- Update api.php stub.
+- Tweak README deployment suggestion.
+
 # v0.1.3
 - Close out the current profile before raising unhandled exceptions.
 - Report unhandled exceptions as errors in TraceView.
