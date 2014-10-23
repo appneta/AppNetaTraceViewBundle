@@ -181,4 +181,24 @@ if(!extension_loaded('oboe') && !function_exists('oboe_set_context')) {
     function oboe_log_exception($layer, Exception $e, $info = null, $backtrace = true, $edge = null) {
         return false;
     }
+
+    /**
+     * Outputs a JavaScript snippet intended to be placed at the beginning of `<head>`
+     *
+     * @param bool use_script_tags Whether to output `<script>` tags around the JavaScript.
+     * @return string JavaScript snippet string if tracing, empty string if not tracing.
+     */
+    function oboe_get_rum_header($use_script_tags = true) {
+        return '';
+    }
+
+    /**
+     * Outputs a JavaScript snippet intended to be placed before the close of `<body>`
+     *
+     * @param bool use_script_tags Whether to output `<script>` tags around the JavaScript.
+     * @return string JavaScript snippet string if tracing, empty string if not tracing.
+     */
+    function oboe_get_rum_footer($use_script_tags = true) {
+        return '';
+    }    
 }
